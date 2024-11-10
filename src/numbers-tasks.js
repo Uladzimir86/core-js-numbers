@@ -73,8 +73,17 @@ function getAverage(value1, value2) {
  *   (0,0) (1,0)    => 1
  *   (-5,0) (10,-10) => 18.027756377319946
  */
-function getDistanceBetweenPoints(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
+  const isNagativePos = (pos1, pos2) =>
+    (pos1 > 0 && pos2 < 0) || (pos1 < 0 && pos2 > 0);
+  const getLength = (coord1, coord2) => {
+    if (isNagativePos(coord1, coord2))
+      return Math.abs(coord1) + Math.abs(coord2);
+    return Math.abs(Math.abs(coord1) - Math.abs(coord2));
+  };
+  const y = getLength(y1, y2);
+  const x = getLength(x1, x2);
+  return Math.sqrt(x ** 2 + y ** 2);
 }
 
 /**
